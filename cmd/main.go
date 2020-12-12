@@ -22,7 +22,7 @@ func main() {
 	sleep.StartTimerWorker(ctx)
 
 	s := &http.Server{
-		Addr:    ":8080",
+		Addr:    config.BindAddress,
 		Handler: handler.Router(),
 	}
 
