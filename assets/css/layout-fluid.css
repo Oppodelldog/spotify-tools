@@ -1,0 +1,55 @@
+.cnt {
+    justify-content: space-evenly;
+}
+
+.cnt.authorized-true {
+    height: 90vh;
+}
+
+.cnt.authorized-false{
+    height: 40vh;
+}
+
+.title {
+}
+
+.auth {
+    min-height: 40px;
+    min-width: 220px;
+    height: calc(0.14 * 100vh);
+    width: calc(0.2 * 100vh);
+}
+
+.subtitle {
+}
+
+.digits {
+    min-width: 100px;
+    min-height: 100px;
+    height: calc(0.2 * 100vh);
+    width: calc(0.10 * 100vh);
+}
+
+.unit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    min-height: 100px;
+    height: calc(0.2 * 100vh);
+    width: calc(0.06 * 100vh);
+}
+
+.inc {
+    min-height: 60px;
+    min-width: 60px;
+    height: calc(0.1 * 100vh);
+    width: calc(0.1 * 100vh);
+}
+
+.set, .clear {
+    min-height: 120px;
+    min-width: 120px;
+    height: calc(0.2 * 100vh);
+    width: calc(0.2 * 100vh);
+}

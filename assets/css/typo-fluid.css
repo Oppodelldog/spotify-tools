@@ -1,0 +1,32 @@
+
+* {
+    letter-spacing: 1px;
+}
+
+.title {
+    font-size: calc(1rem + 100vh * 0.02);
+}
+
+.auth{
+    font-size: calc(0.8rem + 100vh * 0.011);
+}
+
+.subtitle {
+    font-size: calc(0.4rem + 100vh * 0.02);
+}
+
+.digits {
+    font-size: calc(60px + 100vh * 0.02);
+}
+
+.unit {
+    font-size: calc(60px + 100vh * 0.006);
+}
+
+.inc {
+    font-size: calc(0.6rem + 100vh * 0.012);
+}
+
+.set, .clear {
+    font-size: calc(0.8rem + 100vh * 0.015);
+}

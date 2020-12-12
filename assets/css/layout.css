@@ -19,15 +19,20 @@ body {
     margin-top: 30px;
 }
 
+.title{}
+
 .auth {
     height: 40px;
     width: 220px;
 }
 
+.subtitle{}
+
 .timer-form {
     position: relative;
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .digits {
@@ -65,7 +70,7 @@ body {
 }
 
 .cta-cnt > * + * {
-    margin-left:30px;
+    margin-left: 30px;
 }
 
 .set {

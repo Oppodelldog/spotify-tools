@@ -10,11 +10,18 @@ body {
 .cnt {
 }
 
+.title {
+}
+
 .auth {
     border-radius: 10px;
     background-color: #1DB954;
     color: white;
 }
+
+.subtitle {
+}
+
 
 .timer-form {
     border: 3px solid #1b2814;

@@ -3,40 +3,40 @@
     <title>{{.Texts.Title}}</title>
     <link rel="stylesheet" href="{BASE_PATH}/assets/css/normalize.css">
     <link rel="stylesheet" href="{BASE_PATH}/assets/css/layout.css">
+    <link rel="stylesheet" href="{BASE_PATH}/assets/css/layout-fluid.css">
     <link rel="stylesheet" href="{BASE_PATH}/assets/css/typo.css">
+    <link rel="stylesheet" href="{BASE_PATH}/assets/css/typo-fluid.css">
     <link rel="stylesheet" href="{BASE_PATH}/assets/css/styles.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="cnt authorized-{{.IsAuthorized }}">
-    <h1>{{.Texts.Title}}</h1>
+    <h1 class="title">{{.Texts.Title}}</h1>
     {{ if not .IsAuthorized }}
-        <strong>{{.Texts.Unauthorized}}</strong>
+        <strong class="subtitle">{{.Texts.Unauthorized}}</strong>
         <form action="{{ .AuthURL }}" method="get">
-            <input type="submit" class="auth" value="{{.Texts.ToSpotifyAuthorization}}"/>
+            <button type="submit" class="auth">{{.Texts.ToSpotifyAuthorization}}</button>
         </form>
     {{else}}
-        <strong>{{.Username}}</strong>
-        <form id="timer-form" method="post">
-            <input class="digits" id="h" type="text" name="h"/><span class="unit">h</span>
-            <input class="digits" id="m" type="text" name="m"/><span class="unit">m</span>
+        <strong class="subtitle">{{.Username}}</strong>
+        <form id="timer-form" class="timer-form" method="post">
+            <input class="digits" id="h" value="0" type="text" name="h"/><span class="unit">h</span>
+            <input class="digits" id="m" value="0" type="text" name="m"/><span class="unit">m</span>
+            <button class="reset" onclick="reset()" type="button">Reset</button>
         </form>
-        <div>
-            <button class="reset" onclick="reset()">Reset</button>
-        </div>
         <div class="inc-cnt">
             {{ range .Controls}}
                 <button class="inc" onclick="inc({{ .Value }})">{{ .Name }}</button>
             {{end}}
         </div>
         <div class="cta-cnt">
-            <input form="timer-form" class="set" type="submit" value="{{.Texts.SetTimer}}"/>
+            <button form="timer-form" class="set" type="submit">{{.Texts.SetTimer}}</button>
             <div>
                 <form action="{{.ClearURL}}" class="timer-is-set-{{.Timer.IsSet}}">
                     <button class="clear"{{ attrNot .Timer.IsSet `disabled="disabled"`}}>
                         {{.Texts.ClearTimer}}
-                        <span id="due" class="due">--:--:--</span>
+                        <span id="due" class="due">{{.NoDueDisplay}}</span>
                     </button>
 
                 </form>
@@ -57,7 +57,7 @@
     }
 
     function reset() {
-        setTimerToNow();
+        resetTimer();
         updateDisplay()
     }
 
@@ -73,9 +73,10 @@
         if (timer.m >= 60) {
             timer.m = timer.m - 60;
             timer.h++;
-            if (timer.h > 23) {
-                timer.h = 0;
-            }
+        }
+
+        if (timer.h > 23) {
+            timer.h = 0;
         }
     }
 
@@ -89,7 +90,7 @@
         return "{{.Timer.IsSet}}" !== "true";
     }
 
-    function setTimerToNow() {
+    function resetTimer() {
         timer = {
             h: 0,
             m: 0,
@@ -103,7 +104,7 @@
 
     window.onload = () => {
         if (isInitialRender()) {
-            setTimerToNow();
+            resetTimer();
         } else {
             due ={{.Due}};
             timer = {
