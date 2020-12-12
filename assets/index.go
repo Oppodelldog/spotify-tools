@@ -5,9 +5,12 @@ import (
 	"github.com/go-playground/statics/static"
 )
 
-var Files *static.Files
-var CSS *static.Files
-var Images *static.Files
+var (
+	Files  *static.Files
+	CSS    *static.Files
+	Images *static.Files
+	Fonts  *static.Files
+)
 
 func Init() {
 	var err error
@@ -29,6 +32,11 @@ func Init() {
 	}
 
 	Images, err = newStaticIages(cfg)
+	if err != nil {
+		panic(err)
+	}
+
+	Fonts, err = newStaticFonts(cfg)
 	if err != nil {
 		panic(err)
 	}

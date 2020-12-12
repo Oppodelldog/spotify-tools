@@ -4,3 +4,5 @@
 .build-artifiacts
 assets/files.go
 assets/css.go
+assets/img.go
+assets/fonts.go

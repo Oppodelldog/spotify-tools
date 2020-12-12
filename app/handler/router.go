@@ -45,6 +45,10 @@ func Router() http.Handler {
 		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.Images.FS()))).
 		Methods(http.MethodGet)
 
+	r.PathPrefix(getPath("/assets/fonts")).
+		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.Fonts.FS()))).
+		Methods(http.MethodGet)
+
 	r.Use(httpAuthMiddleware)
 	r.Use(handlers.CompressHandler)
 

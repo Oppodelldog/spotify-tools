@@ -16,7 +16,7 @@
 }
 
 .digits {
-    font-size: calc(60px + 100vh * 0.02);
+    font-size: calc(60px + 100vh * 0.016);
 }
 
 .unit {
