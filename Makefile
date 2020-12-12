@@ -31,7 +31,8 @@ build: ## build binary to .build folder
 
 build-full: install-statics generate-assets build
 
-deploy: generate-assets build
+deploy:
+	build-spotify-sleeptimer
 	deploy-spotify-sleeptimer
 
 # Self-Documented Makefile see https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
