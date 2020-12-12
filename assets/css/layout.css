@@ -6,6 +6,15 @@ body {
     height: 100vh;
 }
 
+.background {
+    position: fixed;
+    z-index: -1;
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background-position: center;
+}
+
 .cnt {
     display: flex;
     flex-direction: column;
@@ -19,14 +28,16 @@ body {
     margin-top: 30px;
 }
 
-.title{}
+.title {
+}
 
 .auth {
     height: 40px;
     width: 220px;
 }
 
-.subtitle{}
+.subtitle {
+}
 
 .timer-form {
     position: relative;

@@ -7,6 +7,7 @@ import (
 
 var Files *static.Files
 var CSS *static.Files
+var Images *static.Files
 
 func Init() {
 	var err error
@@ -23,6 +24,11 @@ func Init() {
 	}
 
 	CSS, err = newStaticCss(cfg)
+	if err != nil {
+		panic(err)
+	}
+
+	Images, err = newStaticIages(cfg)
 	if err != nil {
 		panic(err)
 	}

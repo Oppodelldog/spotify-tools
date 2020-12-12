@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="background"></div>
 <div class="cnt authorized-{{.IsAuthorized }}">
     <h1 class="title">{{.Texts.Title}}</h1>
     {{ if not .IsAuthorized }}

@@ -44,6 +44,10 @@ func Router() http.Handler {
 		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.CSS.FS()))).
 		Methods(http.MethodGet)
 
+	r.PathPrefix(getPath("/assets/img")).
+		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.Images.FS()))).
+		Methods(http.MethodGet)
+
 	return wrapAuthentication(r)
 }
 
