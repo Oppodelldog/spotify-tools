@@ -19,7 +19,7 @@ func Init() {
 		AbsoluteAssetsPath     string `env:"SLEEPTIMER_ASSETS_ABSOLUTE_ASSETS_PATH" envDefault:""`
 		BasePath               string `env:"SLEEPTIMER_BASE_PATH" envDefault:""`
 		HTTPAuth               string `env:"SLEEPTIMER_HTTP_AUTH" envDefault:""`
-		BindAddress            string `env:"SLEEPTIMER_BIND_ADDRESS" envDefault:":8080",`
+		BindAddress            string `env:"SLEEPTIMER_BIND_ADDRESS" envDefault:":8080"`
 		SpotifyClientID        string `env:"SLEEPTIMER_SPOTIFY_CLIENT_ID" envDefault:""`
 		SpotifyClientSecret    string `env:"SLEEPTIMER_SPOTIFY_CLIENT_SECRET" envDefault:""`
 		SpotifyAuthRedirectURI string `env:"SLEEPTIMER_SPOTIFY_AUTH_REDIRECT_URI" envDefault:""`
