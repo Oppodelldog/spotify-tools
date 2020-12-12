@@ -1,8 +1,9 @@
 package navigate
 
 import (
-	"github.com/Oppodelldog/spotify-sleep-timer/app/session"
 	"net/http"
+
+	"github.com/Oppodelldog/spotify-sleep-timer/app/session"
 )
 
 func FlushCookieRedirectToIndex(writer http.ResponseWriter, request *http.Request) {

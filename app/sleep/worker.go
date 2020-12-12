@@ -2,11 +2,12 @@ package sleep
 
 import (
 	"context"
+	"time"
+
 	"github.com/Oppodelldog/spotify-sleep-timer/app/storage"
 	"github.com/Oppodelldog/spotify-sleep-timer/app/timer"
 	"github.com/Oppodelldog/spotify-sleep-timer/logger"
 	"github.com/Oppodelldog/spotify-sleep-timer/spotify/authorization"
-	"time"
 )
 
 func StartTimerWorker(ctx context.Context) {
@@ -42,6 +43,7 @@ func checkForTokenRefresh(s *storage.Session) {
 		token, err := authorization.Token(s.Spotify.RefreshToken)
 		if err != nil {
 			logger.Std.Errorf("error refreshing token: %v", err)
+
 			return
 		}
 

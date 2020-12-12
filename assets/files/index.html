@@ -13,7 +13,7 @@
     <h1>{{.Texts.Title}}</h1>
     {{ if not .IsAuthorized }}
         <strong>{{.Texts.Unauthorized}}</strong>
-        <form action="{{ .AuthUrl }}" method="get">
+        <form action="{{ .AuthURL }}" method="get">
             <input type="submit" class="auth" value="{{.Texts.ToSpotifyAuthorization}}"/>
         </form>
     {{else}}
@@ -33,7 +33,7 @@
         <div class="cta-cnt">
             <input form="timer-form" class="set" type="submit" value="{{.Texts.SetTimer}}"/>
             <div>
-                <form action="{{.ClearUrl}}" class="timer-is-set-{{.Timer.IsSet}}">
+                <form action="{{.ClearURL}}" class="timer-is-set-{{.Timer.IsSet}}">
                     <button class="clear"{{ attrNot .Timer.IsSet `disabled="disabled"`}}>
                         {{.Texts.ClearTimer}}
                         <span id="due" class="due">--:--:--</span>

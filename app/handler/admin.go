@@ -1,11 +1,12 @@
 package handler
 
 import (
-	"github.com/Oppodelldog/spotify-sleep-timer/app/storage"
-	"github.com/Oppodelldog/spotify-sleep-timer/app/timer"
 	"html/template"
 	"net/http"
 	"time"
+
+	"github.com/Oppodelldog/spotify-sleep-timer/app/storage"
+	"github.com/Oppodelldog/spotify-sleep-timer/app/timer"
 )
 
 type (
@@ -44,7 +45,7 @@ func adminView(t *template.Template, writer http.ResponseWriter, request *http.R
 }
 
 func getSessions(all []storage.Session) []adminPageSession {
-	var sessions []adminPageSession
+	var sessions = make([]adminPageSession, 0, len(all))
 
 	for _, s := range all {
 		sessions = append(

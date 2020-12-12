@@ -7,7 +7,8 @@ issues:
   exclude-rules:
     - path: _test\.go
       text: .*do not define dynamic errors.*
-
+    - path: assets/files.go
+      text: .*
 linters:
   presets:
     - bugs
@@ -20,4 +21,6 @@ linters:
     - typecheck
     - gochecknoglobals
     - testpackage
+    - exhaustivestruct
+    - gofumpt
   fast: false

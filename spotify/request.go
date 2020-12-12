@@ -12,7 +12,7 @@ import (
 
 func Request(token, method, url string, payload interface{}, query map[string]string, response interface{}) error {
 	if token == "" {
-		return errors.New("token may not be empty")
+		return errors.New("token may not be empty") // nolint: goerr113
 	}
 
 	body, err := marshalPayload(payload)
@@ -20,6 +20,7 @@ func Request(token, method, url string, payload interface{}, query map[string]st
 		return err
 	}
 
+	// nolint: noctx
 	r, err := http.NewRequest(method, url, body)
 	if err != nil {
 		return clientErr(err, url, nil)
@@ -35,10 +36,12 @@ func Request(token, method, url string, payload interface{}, query map[string]st
 	c := http.Client{
 		Timeout: time.Second,
 	}
+
 	resp, err := c.Do(r)
 	if err != nil {
 		return clientErr(err, url, nil)
 	}
+	defer resp.Body.Close()
 
 	var success = false
 	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
@@ -69,16 +72,24 @@ func Request(token, method, url string, payload interface{}, query map[string]st
 }
 
 func clientErr(err interface{}, url string, statusCode interface{}) error {
-	return fmt.Errorf("spotify api client error calling url=%s status=%v error=%v", url, statusCode, err)
+	// nolint: goerr113
+	return fmt.Errorf(
+		"spotify api client error calling url=%s status=%v error=%v",
+		url,
+		statusCode,
+		err,
+	)
 }
 
 func marshalPayload(payload interface{}) (*bytes.Buffer, error) {
 	var body []byte
+
 	if payload != nil {
 		var err error
+
 		body, err = json.Marshal(payload)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("error marshallig payload: %w", err)
 		}
 	}
 

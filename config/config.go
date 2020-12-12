@@ -9,7 +9,7 @@ var UseStaticFiles bool
 var AbsoluteAssetsPath string
 var SpotifyClientID string
 var SpotifyClientSecret string
-var SpotifyAuthRedirectUri string
+var SpotifyAuthRedirectURI string
 
 func Init() {
 	var cfg struct {
@@ -18,7 +18,7 @@ func Init() {
 		BasePath               string `env:"SLEEPTIMER_BASE_PATH" envDefault:""`
 		SpotifyClientID        string `env:"SLEEPTIMER_SPOTIFY_CLIENT_ID" envDefault:""`
 		SpotifyClientSecret    string `env:"SLEEPTIMER_SPOTIFY_CLIENT_SECRET" envDefault:""`
-		SpotifyAuthRedirectUri string `env:"SLEEPTIMER_SPOTIFY_AUTH_REDIRECT_URI" envDefault:""`
+		SpotifyAuthRedirectURI string `env:"SLEEPTIMER_SPOTIFY_AUTH_REDIRECT_URI" envDefault:""`
 	}
 
 	err := env.Parse(&cfg)
@@ -31,5 +31,5 @@ func Init() {
 	BasePath = cfg.BasePath
 	SpotifyClientID = cfg.SpotifyClientID
 	SpotifyClientSecret = cfg.SpotifyClientSecret
-	SpotifyAuthRedirectUri = cfg.SpotifyAuthRedirectUri
+	SpotifyAuthRedirectURI = cfg.SpotifyAuthRedirectURI
 }

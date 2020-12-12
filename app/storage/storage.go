@@ -1,10 +1,11 @@
 package storage
 
 import (
-	"github.com/Oppodelldog/spotify-sleep-timer/app/timer"
-	"github.com/google/uuid"
 	"sync"
 	"time"
+
+	"github.com/Oppodelldog/spotify-sleep-timer/app/timer"
+	"github.com/google/uuid"
 )
 
 var storage = Storage{Mutex: &sync.Mutex{}, Data: map[string]*Session{}}
@@ -53,11 +54,13 @@ func Set(session Session) string {
 	for id, u := range storage.Data {
 		if u.ID == session.ID {
 			storage.Data[id] = &session
+
 			return id
 		}
 	}
 
 	var id = uuid.New().String()
+
 	storage.Data[id] = &session
 
 	return id
@@ -67,7 +70,7 @@ func All() []Session {
 	storage.Mutex.Lock()
 	defer storage.Mutex.Unlock()
 
-	var all []Session
+	var all = make([]Session, 0, len(storage.Data))
 
 	for _, session := range storage.Data {
 		all = append(all, *session)

@@ -2,11 +2,12 @@ package handler
 
 import (
 	"errors"
+	"html/template"
+	"net/http"
+
 	"github.com/Oppodelldog/spotify-sleep-timer/app/navigate"
 	"github.com/Oppodelldog/spotify-sleep-timer/app/session"
 	"github.com/Oppodelldog/spotify-sleep-timer/app/timer"
-	"html/template"
-	"net/http"
 )
 
 type indexPage struct {
@@ -14,8 +15,8 @@ type indexPage struct {
 	Timer        timer.Timer
 	Due          int
 	IsAuthorized bool
-	AuthUrl      string
-	ClearUrl     string
+	AuthURL      string
+	ClearURL     string
 	Texts        indexPageTexts
 	Controls     indexPageControls
 }
@@ -35,10 +36,11 @@ type indexPageControl struct {
 	Value int
 }
 
+// nolint: gomnd
 func showIndexPage(t *template.Template, writer http.ResponseWriter, request *http.Request) {
 	page := indexPage{
-		AuthUrl:  "/auth",
-		ClearUrl: "/clear",
+		AuthURL:  "/auth",
+		ClearURL: "/clear",
 		Controls: indexPageControls{
 			{
 				Name:  "+ 5 min",
@@ -76,6 +78,7 @@ func showIndexPage(t *template.Template, writer http.ResponseWriter, request *ht
 		case errors.Is(session.ErrNoCookieFound, err):
 		case errors.Is(session.ErrUserNotFound, err):
 			navigate.FlushCookieRedirectToIndex(writer, request)
+
 			return
 		}
 	}
@@ -86,5 +89,4 @@ func showIndexPage(t *template.Template, writer http.ResponseWriter, request *ht
 
 		return
 	}
-
 }

@@ -6,22 +6,22 @@ import (
 )
 
 const (
-	sessionCookie = "session"
-	cookiePath    = "/"
+	sessionCookie  = "session"
+	cookiePath     = "/"
+	cookieLifetime = 2 * time.Hour
 )
 
 func getSessionCookie(request *http.Request) (*http.Cookie, error) {
 	return request.Cookie(sessionCookie)
 }
 
-func SetSessionCookie(writer http.ResponseWriter, sessionId string) {
-
+func SetSessionCookie(writer http.ResponseWriter, sessionID string) {
 	http.SetCookie(writer, &http.Cookie{
 		Name:       sessionCookie,
-		Value:      sessionId,
+		Value:      sessionID,
 		Path:       cookiePath,
 		Domain:     "",
-		Expires:    time.Now().Add(2 * time.Hour),
+		Expires:    time.Now().Add(cookieLifetime),
 		RawExpires: "",
 		MaxAge:     0,
 		Secure:     false,

@@ -10,7 +10,7 @@ type Due struct {
 func (d Due) Due() time.Duration {
 	t0 := d.Start.Add(d.Duration)
 
-	return time.Now().Sub(t0)
+	return time.Since(t0)
 }
 
 func (d Due) IsOverdue() bool {

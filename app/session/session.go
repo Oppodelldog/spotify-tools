@@ -2,8 +2,9 @@ package session
 
 import (
 	"errors"
-	"github.com/Oppodelldog/spotify-sleep-timer/app/storage"
 	"net/http"
+
+	"github.com/Oppodelldog/spotify-sleep-timer/app/storage"
 )
 
 var (

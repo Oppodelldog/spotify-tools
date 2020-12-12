@@ -3,18 +3,20 @@ package main
 import (
 	"context"
 	"errors"
+	"net/http"
+	"os"
+	"os/signal"
+
 	"github.com/Oppodelldog/spotify-sleep-timer/app/handler"
 	"github.com/Oppodelldog/spotify-sleep-timer/app/sleep"
 	"github.com/Oppodelldog/spotify-sleep-timer/assets"
 	"github.com/Oppodelldog/spotify-sleep-timer/config"
 	"github.com/Oppodelldog/spotify-sleep-timer/logger"
-	"net/http"
-	"os"
-	"os/signal"
 )
 
 func main() {
 	ctx := NewSignalContext(os.Interrupt)
+
 	config.Init()
 	assets.Init()
 	sleep.StartTimerWorker(ctx)
@@ -36,6 +38,7 @@ func main() {
 
 func closeServer(ctx context.Context, s *http.Server) {
 	<-ctx.Done()
+
 	err := s.Close()
 	if err != nil {
 		logger.Std.Error(err.Error())

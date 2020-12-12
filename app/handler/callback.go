@@ -1,15 +1,16 @@
 package handler
 
 import (
+	"html/template"
+	"net/http"
+	"time"
+
 	"github.com/Oppodelldog/spotify-sleep-timer/app/navigate"
 	"github.com/Oppodelldog/spotify-sleep-timer/app/session"
 	"github.com/Oppodelldog/spotify-sleep-timer/app/storage"
 	"github.com/Oppodelldog/spotify-sleep-timer/app/timer"
 	"github.com/Oppodelldog/spotify-sleep-timer/spotify/authorization"
 	"github.com/Oppodelldog/spotify-sleep-timer/spotify/me"
-	"html/template"
-	"net/http"
-	"time"
 )
 
 type callbackPage struct {
@@ -21,20 +22,22 @@ type callbackPage struct {
 }
 
 func redirectToSpotifyAuthPage(writer http.ResponseWriter, request *http.Request) {
-	authUrl, err := authorization.AuthUrl()
+	authURL, err := authorization.AuthURL()
 	if err != nil {
 		writeInternalServerErrorStatusCode(writer, err)
 
 		return
 	}
 
-	navigate.Redirect(writer, request, authUrl)
+	navigate.Redirect(writer, request, authURL)
 }
 
 func spotifyAuthCallback(t *template.Template, writer http.ResponseWriter, request *http.Request) {
-	var code = request.URL.Query().Get("code")
-	//var state = request.URL.Query().Get("state")
-	var errMsg = request.URL.Query().Get("error")
+	var (
+		code   = request.URL.Query().Get("code")
+		errMsg = request.URL.Query().Get("error")
+	)
+
 	if code != "" {
 		authResponse, err := authorization.Auth(code)
 		if err != nil {
@@ -62,9 +65,9 @@ func spotifyAuthCallback(t *template.Template, writer http.ResponseWriter, reque
 			Timer: timer.Timer{},
 		}
 
-		sessionId := storage.Set(user)
+		sessionID := storage.Set(user)
 
-		session.SetSessionCookie(writer, sessionId)
+		session.SetSessionCookie(writer, sessionID)
 		navigate.RedirectToIndex(writer, request)
 
 		return

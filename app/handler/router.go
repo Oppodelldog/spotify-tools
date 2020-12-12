@@ -1,11 +1,12 @@
 package handler
 
 import (
+	"net/http"
+	"path"
+
 	"github.com/Oppodelldog/spotify-sleep-timer/assets"
 	"github.com/Oppodelldog/spotify-sleep-timer/config"
 	"github.com/gorilla/mux"
-	"net/http"
-	"path"
 )
 
 func Router() http.Handler {
