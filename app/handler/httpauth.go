@@ -8,8 +8,8 @@ import (
 	"github.com/Oppodelldog/spotify-sleep-timer/config"
 )
 
-func wrapAuthentication(h http.Handler) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+func httpAuthMiddleware(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("WWW-Authenticate", `Basic realm="Restricted"`)
 
 		auth := r.Header.Get("Authorization")
@@ -33,5 +33,5 @@ func wrapAuthentication(h http.Handler) http.HandlerFunc {
 		}
 
 		h.ServeHTTP(w, r)
-	}
+	})
 }

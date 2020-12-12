@@ -6,6 +6,7 @@ import (
 
 	"github.com/Oppodelldog/spotify-sleep-timer/assets"
 	"github.com/Oppodelldog/spotify-sleep-timer/config"
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -36,10 +37,6 @@ func Router() http.Handler {
 		Handler(withTemplate("admin.html", adminView)).
 		Methods(http.MethodGet)
 
-	r.PathPrefix(getPath("/assets/files")).
-		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.Files.FS()))).
-		Methods(http.MethodGet)
-
 	r.PathPrefix(getPath("/assets/css")).
 		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.CSS.FS()))).
 		Methods(http.MethodGet)
@@ -48,7 +45,10 @@ func Router() http.Handler {
 		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.Images.FS()))).
 		Methods(http.MethodGet)
 
-	return wrapAuthentication(r)
+	r.Use(httpAuthMiddleware)
+	r.Use(handlers.CompressHandler)
+
+	return r
 }
 
 func getPath(s string) string {
