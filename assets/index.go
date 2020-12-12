@@ -6,6 +6,7 @@ import (
 )
 
 var Files *static.Files
+var CSS *static.Files
 
 func Init() {
 	var err error
@@ -17,6 +18,11 @@ func Init() {
 	}
 
 	Files, err = newStaticAssets(cfg)
+	if err != nil {
+		panic(err)
+	}
+
+	CSS, err = newStaticCss(cfg)
 	if err != nil {
 		panic(err)
 	}

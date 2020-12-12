@@ -36,8 +36,12 @@ func Router() http.Handler {
 		Handler(withTemplate("admin.html", adminView)).
 		Methods(http.MethodGet)
 
-	r.PathPrefix(getPath("/assets")).
+	r.PathPrefix(getPath("/assets/files")).
 		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.Files.FS()))).
+		Methods(http.MethodGet)
+
+	r.PathPrefix(getPath("/assets/css")).
+		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.CSS.FS()))).
 		Methods(http.MethodGet)
 
 	return wrapAuthentication(r)

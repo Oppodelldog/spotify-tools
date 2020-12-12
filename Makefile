@@ -20,6 +20,7 @@ fmt: ## gofmt and goimports all go files
 
 generate-assets: ## generates static assets
 	statics -i=assets/files -o=assets/files.go  -pkg=assets -group=Assets .env-ignore=\.gitignore -prefix=assets
+	statics -i=assets/css   -o=assets/css.go    -pkg=assets -group=Css .env-ignore=\.gitignore -prefix=assets
 
 build: ## build binary to .build folder
 	rm -f $(BINARY_FILE_PATH) 

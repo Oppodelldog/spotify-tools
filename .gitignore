@@ -3,3 +3,4 @@
 .env.prod
 
 assets/files.go
+assets/css.go
