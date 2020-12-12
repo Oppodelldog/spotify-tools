@@ -23,7 +23,7 @@ func setTimer(writer http.ResponseWriter, request *http.Request) {
 
 	s, err := session.GetSession(request)
 	if err != nil {
-		navigate.FlushCookieRedirectToIndex(writer, request)
+		navigate.FlushCookieRedirect(writer, request, indexPagePath())
 
 		return
 	}
@@ -36,7 +36,7 @@ func setTimer(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	session.SetSession(s)
-	navigate.RedirectToIndex(writer, request)
+	navigate.Redirect(writer, request, indexPagePath())
 }
 
 func makeTimer(s storage.Session, form url.Values) (storage.Session, error) {

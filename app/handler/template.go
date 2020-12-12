@@ -2,10 +2,12 @@ package handler
 
 import (
 	"fmt"
+	"github.com/Oppodelldog/spotify-sleep-timer/config"
 	"html/template"
 	"io/ioutil"
 	"net/http"
 	"path"
+	"strings"
 
 	"github.com/Oppodelldog/spotify-sleep-timer/assets"
 	"github.com/Oppodelldog/spotify-sleep-timer/logger"
@@ -54,6 +56,8 @@ func loadTemplate(filename string) (*template.Template, error) {
 		return nil, fmt.Errorf("cannot read template file '%s': %w", filename, err)
 	}
 
+	b = substituteBasePath(b)
+
 	t := template.New("index")
 	t.Funcs(template.FuncMap{
 		"attrNot": func(v bool, attr string) template.HTMLAttr {
@@ -71,4 +75,10 @@ func loadTemplate(filename string) (*template.Template, error) {
 	}
 
 	return t, nil
+}
+
+func substituteBasePath(b []byte) []byte {
+	b = []byte(strings.ReplaceAll(string(b), "{BASE_PATH}", config.BasePath))
+
+	return b
 }

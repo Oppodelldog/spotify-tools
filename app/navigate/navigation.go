@@ -6,13 +6,9 @@ import (
 	"github.com/Oppodelldog/spotify-sleep-timer/app/session"
 )
 
-func FlushCookieRedirectToIndex(writer http.ResponseWriter, request *http.Request) {
+func FlushCookieRedirect(writer http.ResponseWriter, request *http.Request, url string) {
 	session.ClearSessionCookie(writer)
-	RedirectToIndex(writer, request)
-}
-
-func RedirectToIndex(writer http.ResponseWriter, request *http.Request) {
-	Redirect(writer, request, "/")
+	Redirect(writer, request, url)
 }
 
 func Redirect(writer http.ResponseWriter, request *http.Request, url string) {

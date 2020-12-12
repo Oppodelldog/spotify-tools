@@ -12,11 +12,11 @@ import (
 func Router() http.Handler {
 	r := mux.NewRouter()
 
-	r.Path(getPath("/")).
+	r.Path(indexPagePath()).
 		Handler(withTemplate("index.html", showIndexPage)).
 		Methods(http.MethodGet)
 
-	r.Path(getPath("/")).
+	r.Path(indexPagePath()).
 		Handler(http.HandlerFunc(setTimer)).
 		Methods(http.MethodPost)
 
@@ -37,7 +37,7 @@ func Router() http.Handler {
 		Methods(http.MethodGet)
 
 	r.PathPrefix(getPath("/assets")).
-		Handler(http.FileServer(assets.Files.FS())).
+		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.Files.FS()))).
 		Methods(http.MethodGet)
 
 	return r
@@ -45,4 +45,8 @@ func Router() http.Handler {
 
 func getPath(s string) string {
 	return path.Join(config.BasePath, s)
+}
+
+func indexPagePath() string {
+	return getPath("/")
 }

@@ -68,7 +68,7 @@ func spotifyAuthCallback(t *template.Template, writer http.ResponseWriter, reque
 		sessionID := storage.Set(user)
 
 		session.SetSessionCookie(writer, sessionID)
-		navigate.RedirectToIndex(writer, request)
+		navigate.Redirect(writer, request, indexPagePath())
 
 		return
 	}

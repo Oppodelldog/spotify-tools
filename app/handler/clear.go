@@ -18,7 +18,7 @@ func clearTimer(writer http.ResponseWriter, request *http.Request) {
 
 	session, err := session2.GetSession(request)
 	if err != nil {
-		navigate.FlushCookieRedirectToIndex(writer, request)
+		navigate.FlushCookieRedirect(writer, request, indexPagePath())
 
 		return
 	}
@@ -27,5 +27,5 @@ func clearTimer(writer http.ResponseWriter, request *http.Request) {
 
 	session2.SetSession(session)
 
-	navigate.RedirectToIndex(writer, request)
+	navigate.Redirect(writer, request, indexPagePath())
 }

@@ -39,8 +39,8 @@ type indexPageControl struct {
 // nolint: gomnd
 func showIndexPage(t *template.Template, writer http.ResponseWriter, request *http.Request) {
 	page := indexPage{
-		AuthURL:  "/auth",
-		ClearURL: "/clear",
+		AuthURL:  getPath("/auth"),
+		ClearURL: getPath("/clear"),
 		Controls: indexPageControls{
 			{
 				Name:  "+ 5 min",
@@ -77,7 +77,7 @@ func showIndexPage(t *template.Template, writer http.ResponseWriter, request *ht
 		switch {
 		case errors.Is(session.ErrNoCookieFound, err):
 		case errors.Is(session.ErrUserNotFound, err):
-			navigate.FlushCookieRedirectToIndex(writer, request)
+			navigate.FlushCookieRedirect(writer, request, indexPagePath())
 
 			return
 		}
