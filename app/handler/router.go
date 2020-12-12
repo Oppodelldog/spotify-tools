@@ -40,7 +40,7 @@ func Router() http.Handler {
 		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.Files.FS()))).
 		Methods(http.MethodGet)
 
-	return r
+	return wrapAuthentication(r)
 }
 
 func getPath(s string) string {

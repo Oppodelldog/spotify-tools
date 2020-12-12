@@ -5,6 +5,7 @@ import (
 )
 
 var BasePath string
+var HTTPAuth string
 var UseStaticFiles bool
 var AbsoluteAssetsPath string
 var SpotifyClientID string
@@ -16,6 +17,7 @@ func Init() {
 		UseStaticFiles         bool   `env:"SLEEPTIMER_ASSETS_USE_STATIC_FILES" envDefault:"true"`
 		AbsoluteAssetsPath     string `env:"SLEEPTIMER_ASSETS_ABSOLUTE_ASSETS_PATH" envDefault:""`
 		BasePath               string `env:"SLEEPTIMER_BASE_PATH" envDefault:""`
+		HTTPAuth               string `env:"SLEEPTIMER_HTTP_AUTH" envDefault:""`
 		SpotifyClientID        string `env:"SLEEPTIMER_SPOTIFY_CLIENT_ID" envDefault:""`
 		SpotifyClientSecret    string `env:"SLEEPTIMER_SPOTIFY_CLIENT_SECRET" envDefault:""`
 		SpotifyAuthRedirectURI string `env:"SLEEPTIMER_SPOTIFY_AUTH_REDIRECT_URI" envDefault:""`
@@ -29,6 +31,7 @@ func Init() {
 	UseStaticFiles = cfg.UseStaticFiles
 	AbsoluteAssetsPath = cfg.AbsoluteAssetsPath
 	BasePath = cfg.BasePath
+	HTTPAuth = cfg.HTTPAuth
 	SpotifyClientID = cfg.SpotifyClientID
 	SpotifyClientSecret = cfg.SpotifyClientSecret
 	SpotifyAuthRedirectURI = cfg.SpotifyAuthRedirectURI
