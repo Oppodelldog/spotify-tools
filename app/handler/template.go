@@ -2,12 +2,13 @@ package handler
 
 import (
 	"fmt"
-	"github.com/Oppodelldog/spotify-sleep-timer/config"
 	"html/template"
 	"io/ioutil"
 	"net/http"
 	"path"
 	"strings"
+
+	"github.com/Oppodelldog/spotify-sleep-timer/config"
 
 	"github.com/Oppodelldog/spotify-sleep-timer/assets"
 	"github.com/Oppodelldog/spotify-sleep-timer/logger"
