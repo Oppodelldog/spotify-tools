@@ -1,6 +1,6 @@
 .idea
 .env.local
 .env.prod
-
+.build-artifiacts
 assets/files.go
 assets/css.go
