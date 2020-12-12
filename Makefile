@@ -1,5 +1,5 @@
-BINARY_NAME=droxy
-BINARY_FILE_PATH=".build/$(BINARY_NAME)"
+BINARY_NAME=spotify-sleeptimer
+BINARY_FILE_PATH=".build-artifiacts/$(BINARY_NAME)"
 MAIN_FILE="cmd/main.go"
 
 setup: ## Install tools
@@ -24,6 +24,9 @@ generate-assets: ## generates static assets
 build: ## build binary to .build folder
 	rm -f $(BINARY_FILE_PATH) 
 	go build -o $(BINARY_FILE_PATH) $(MAIN_FILE)
+
+deploy: generate-assets build
+	deploy-spotify-sleeptimer
 
 # Self-Documented Makefile see https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help:
