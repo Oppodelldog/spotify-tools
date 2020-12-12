@@ -1,0 +1,134 @@
+<html lang="en_US">
+<head>
+    <title>{{.Texts.Title}}</title>
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/typo.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="cnt authorized-{{.IsAuthorized }}">
+    <h1>{{.Texts.Title}}</h1>
+    {{ if not .IsAuthorized }}
+        <strong>{{.Texts.Unauthorized}}</strong>
+        <form action="{{ .AuthUrl }}" method="get">
+            <input type="submit" class="auth" value="{{.Texts.ToSpotifyAuthorization}}"/>
+        </form>
+    {{else}}
+        <strong>{{.Username}}</strong>
+        <form id="timer-form" method="post">
+            <input class="digits" id="h" type="text" name="h"/><span class="unit">h</span>
+            <input class="digits" id="m" type="text" name="m"/><span class="unit">m</span>
+        </form>
+        <div>
+            <button class="reset" onclick="reset()">Reset</button>
+        </div>
+        <div class="inc-cnt">
+            {{ range .Controls}}
+                <button class="inc" onclick="inc({{ .Value }})">{{ .Name }}</button>
+            {{end}}
+        </div>
+        <div class="cta-cnt">
+            <input form="timer-form" class="set" type="submit" value="{{.Texts.SetTimer}}"/>
+            <div>
+                <form action="{{.ClearUrl}}" class="timer-is-set-{{.Timer.IsSet}}">
+                    <button class="clear"{{ attrNot .Timer.IsSet `disabled="disabled"`}}>
+                        {{.Texts.ClearTimer}}
+                        <span id="due" class="due">--:--:--</span>
+                    </button>
+
+                </form>
+            </div>
+        </div>
+
+    {{end}}
+</div>
+
+<script type="text/javascript">
+    let timer = {};
+    let due = 0;
+    let dueInterval = null;
+
+    function inc(value) {
+        timer.m += value;
+        updateDisplay();
+    }
+
+    function reset() {
+        setTimerToNow();
+        updateDisplay()
+    }
+
+    function setValue(id, value) {
+        document.getElementById(id).value = value;
+    }
+
+    function getValue(id) {
+        return document.getElementById(id).value;
+    }
+
+    function normalizeTimer() {
+        if (timer.m >= 60) {
+            timer.m = timer.m - 60;
+            timer.h++;
+            if (timer.h > 23) {
+                timer.h = 0;
+            }
+        }
+    }
+
+    function updateDisplay() {
+        normalizeTimer();
+        setValue("h", timer.h);
+        setValue("m", timer.m);
+    }
+
+    function isInitialRender() {
+        return "{{.Timer.IsSet}}" !== "true";
+    }
+
+    function setTimerToNow() {
+        timer = {
+            h: 0,
+            m: 0,
+            s: 0,
+        };
+    }
+
+    function displayDue() {
+        document.getElementById("due").innerHTML = durationToDisplay();
+    }
+
+    window.onload = () => {
+        if (isInitialRender()) {
+            setTimerToNow();
+        } else {
+            due ={{.Due}};
+            timer = {
+                h: {{.Timer.Hours}},
+                m:  {{.Timer.Minutes}},
+            };
+            displayDue();
+            dueInterval = setInterval(displayDue, 1000);
+
+        }
+        updateDisplay();
+    };
+
+    function durationToDisplay() {
+        due++;
+        if (due >= 0) {
+            clearInterval(dueInterval)
+            due = 0;
+            location.reload();
+        }
+        const date = new Date(0);
+        date.setSeconds(due * -1);
+
+        return date.toISOString().substr(11, 8);
+    }
+</script>
+</body>
+</html>

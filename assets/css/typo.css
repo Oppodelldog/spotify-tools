@@ -1,0 +1,52 @@
+
+* {
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 1px;
+}
+
+.cnt {
+
+}
+
+.auth {
+    font-weight: bold;
+}
+
+.digits {
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.unit {
+    font-size: 60px;
+}
+
+.reset {
+    font-weight: bold;
+}
+
+.inc-cnt {
+}
+
+.inc {
+    font-weight: bold;
+}
+
+.cta-cnt {
+}
+
+.set {
+
+}
+
+.set, .reset, .inc, .clear {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.clear {
+}
+
+.due {
+}

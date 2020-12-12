@@ -1,0 +1,76 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.cnt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cnt {
+}
+
+.cnt > * + * {
+    margin-top: 20px;
+}
+
+.auth {
+    height: 40px;
+    width: 220px;
+}
+
+.digits {
+    width: 100px;
+}
+
+.unit {
+}
+
+.reset {
+    height: 50px;
+    width: 70px;
+}
+
+.inc-cnt {
+    display: flex;
+    flex-direction: row;
+}
+
+.inc-cnt > * + * {
+    margin-left: 4px;
+}
+
+.inc {
+    height: 60px;
+    width: 60px;
+
+}
+
+.cta-cnt {
+    display: flex;
+    flex-direction: row;
+}
+
+.cta-cnt > * + * {
+    margin-left: 4px;
+}
+
+.set {
+}
+
+.clear {
+}
+
+.due {
+    display: block;
+}
+
+.set, .clear {
+    height: 80px;
+    width: 120px;
+}

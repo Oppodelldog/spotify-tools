@@ -1,0 +1,60 @@
+body {
+    color: white;
+    background-color: black;
+}
+
+.cnt {
+}
+
+.auth {
+    border-radius: 10px;
+    background-color: #1DB954;
+    color: white;
+}
+
+.digits {
+    background-color: transparent;
+    color: white;
+}
+
+.unit {
+    color: white;
+}
+
+.reset {
+    background-color: #1b4642;
+    color: white;
+}
+
+.inc-cnt {
+}
+
+.inc {
+    background-color: #A6F023;
+    color: black;
+}
+
+.cta-cnt {
+}
+
+.set {
+    background-color: #1DB954;
+    color: white;
+}
+
+.clear {
+    background-color: #c3032f;
+    color: white;
+}
+
+.clear:disabled {
+    color: #7e7e7e;
+    background-color: #5d4444;
+}
+
+.due {
+}
+
+.set, .reset, .inc, .clear {
+    border-radius: 10px;
+}
