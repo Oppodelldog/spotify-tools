@@ -16,12 +16,18 @@ body {
 }
 
 .cnt > * + * {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .auth {
     height: 40px;
     width: 220px;
+}
+
+.timer-form {
+    position: relative;
+    display: flex;
+    flex-direction: row;
 }
 
 .digits {
@@ -34,6 +40,9 @@ body {
 .reset {
     height: 50px;
     width: 70px;
+
+    margin-top: 22px;
+    margin-left: 20px;
 }
 
 .inc-cnt {
@@ -42,13 +51,12 @@ body {
 }
 
 .inc-cnt > * + * {
-    margin-left: 4px;
+    margin-left: 30px;
 }
 
 .inc {
     height: 60px;
     width: 60px;
-
 }
 
 .cta-cnt {
@@ -57,7 +65,7 @@ body {
 }
 
 .cta-cnt > * + * {
-    margin-left: 4px;
+    margin-left:30px;
 }
 
 .set {
