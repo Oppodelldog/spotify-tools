@@ -14,6 +14,7 @@ type indexPage struct {
 	Username     string
 	Timer        timer.Timer
 	Due          int
+	NoDueDisplay string
 	IsAuthorized bool
 	AuthURL      string
 	ClearURL     string
@@ -55,7 +56,7 @@ func showIndexPage(t *template.Template, writer http.ResponseWriter, request *ht
 				Value: 30,
 			},
 			{
-				Name:  "+ 1 h",
+				Name:  "+ 60 min",
 				Value: 60,
 			},
 		},
@@ -66,6 +67,7 @@ func showIndexPage(t *template.Template, writer http.ResponseWriter, request *ht
 			SetTimer:               "Set Timer",
 			ToSpotifyAuthorization: "To Spotify Authorization",
 		},
+		NoDueDisplay: "--:--:--",
 	}
 
 	if user, err := session.GetSession(request); err == nil {
