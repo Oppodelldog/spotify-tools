@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/base64"
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -10,7 +11,7 @@ import (
 
 func httpAuthMiddleware(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("WWW-Authenticate", `Basic realm="Restricted"`)
+		w.Header().Set("WWW-Authenticate", fmt.Sprintf(`Basic realm="%s"`, config.HttpAuth.Realm))
 
 		auth := r.Header.Get("Authorization")
 		if !strings.HasPrefix(auth, "Basic ") {
@@ -26,7 +27,7 @@ func httpAuthMiddleware(h http.Handler) http.Handler {
 			return
 		}
 
-		if config.HTTPAuth != "" && string(up) != config.HTTPAuth {
+		if config.HttpAuth.Credentials != "" && string(up) != config.HttpAuth.Credentials {
 			http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
 
 			return
