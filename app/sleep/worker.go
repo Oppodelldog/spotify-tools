@@ -39,7 +39,7 @@ func work() {
 }
 
 func checkForTokenRefresh(s *storage.Session) {
-	if s.Spotify.AsDue().IsOverdue() {
+	if s.Spotify.TokenDue().IsOverdue() {
 		token, err := authorization.Token(s.Spotify.RefreshToken)
 		if err != nil {
 			logger.Std.Errorf("error refreshing token: %v", err)

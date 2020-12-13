@@ -55,7 +55,7 @@ func getSessions(all []storage.Session) []adminPageSession {
 				ID:       s.ID[:4] + "...",
 				Name:     s.Name[:3] + "...",
 				TimerDue: s.Timer.AsDue().Due(),
-				TokenDue: s.Spotify.AsDue().Due(),
+				TokenDue: s.Spotify.TokenDue().Due(),
 				Timer:    s.Timer,
 				Spotify: storage.Spotify{
 					AccessToken:  s.Spotify.AccessToken[:10] + "...",

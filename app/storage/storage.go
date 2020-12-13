@@ -29,7 +29,7 @@ type (
 	}
 )
 
-func (s Spotify) AsDue() timer.Due {
+func (s Spotify) TokenDue() timer.Due {
 	const refreshBeforeExpiration = time.Minute
 
 	return timer.Due{
