@@ -22,10 +22,11 @@ type (
 		Spotify Spotify
 	}
 	Spotify struct {
-		AccessToken  string
-		RefreshToken string
-		ExpiresIn    int
-		RefreshedAt  time.Time
+		AccessToken   string
+		RefreshToken  string
+		ExpiresIn     int
+		RefreshedAt   time.Time
+		RefreshFailed bool
 	}
 )
 
