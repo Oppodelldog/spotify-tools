@@ -15,11 +15,12 @@ type (
 		Sessions []adminPageSession
 	}
 	adminPageSession struct {
-		ID      string
-		Name    string
-		Timer   timer.Timer
-		Spotify storage.Spotify
-		Due     time.Duration
+		ID       string
+		Name     string
+		Timer    timer.Timer
+		Spotify  storage.Spotify
+		TimerDue time.Duration
+		TokenDue time.Duration
 	}
 )
 
@@ -51,10 +52,11 @@ func getSessions(all []storage.Session) []adminPageSession {
 		sessions = append(
 			sessions,
 			adminPageSession{
-				ID:    s.ID[:4] + "...",
-				Name:  s.Name[:3] + "...",
-				Due:   s.Timer.AsDue().Due(),
-				Timer: s.Timer,
+				ID:       s.ID[:4] + "...",
+				Name:     s.Name[:3] + "...",
+				TimerDue: s.Timer.AsDue().Due(),
+				TokenDue: s.Spotify.AsDue().Due(),
+				Timer:    s.Timer,
 				Spotify: storage.Spotify{
 					AccessToken:  s.Spotify.AccessToken[:10] + "...",
 					RefreshToken: s.Spotify.RefreshToken[:10] + "...",

@@ -18,11 +18,12 @@
             <li><span class="key">Name:</span><span class="value"> {{.Name}}</span></li>
             <li><span class="key">Timer:</span><span class="value"> {{.Timer.Hours}}h {{.Timer.Minutes}}m</span></li>
             <li><span class="key">Timer set at:</span><span class="value">{{.Timer.SetAt}}</span></li>
-            <li><span class="key">Due:</span><span class="value"> {{.Due}}</span></li>
+            <li><span class="key">Due:</span><span class="value"> {{.TimerDue}}</span></li>
             <li><span class="key">Timer Active:</span> <span class="value">{{.Timer.IsSet}}</span></li>
             <li><span class="key">Spotify.Token: </span><span class="value">{{.Spotify.AccessToken}}</span></li>
+            <li><span class="key">Spotify.Lifetime:</span> <span class="value">{{.Spotify.ExpiresIn}}</span></li>
+            <li><span class="key">Spotify.TokenDue:</span><span class="value"> {{.TokenDue}}</span></li>
             <li><span class="key">Spotify.RefreshToken:</span><span class="value"> {{.Spotify.RefreshToken}}</span></li>
-            <li><span class="key">Spotify.ExpiresIn:</span> <span class="value">{{.Spotify.ExpiresIn}}</span></li>
             <li><span class="key">Spotify.RefreshedAt: </span><span class="value">{{.Spotify.RefreshedAt}}</span></li>
         </ul>
     </div>
