@@ -24,8 +24,9 @@
         <form id="timer-form" class="timer-form" method="post">
             <input class="digits" id="h" value="0" type="text" name="h"/><span class="unit">h</span>
             <input class="digits" id="m" value="0" type="text" name="m"/><span class="unit">m</span>
-            <input class="reset" onclick="resetTimerControl()" type="button" value="Reset">
+
         </form>
+        <div><button class="reset" onclick="resetTimerControl()">Reset</button></div>
         <div class="inc-cnt">
             {{ range .Controls}}
                 <button class="inc" onclick="inc({{ .Value }})">{{ .Name }}</button>
