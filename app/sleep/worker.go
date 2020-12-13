@@ -33,16 +33,15 @@ func StartTimerWorker(ctx context.Context) {
 
 func work() {
 	storage.MutateAll(func(s *storage.Session) {
-		checkForTokenRefresh(s)
 		checkForPause(s)
 	})
 }
 
-func checkForTokenRefresh(s *storage.Session) {
-	if s.Spotify.TokenDue().IsOverdue() && s.Spotify.RefreshErr == nil {
+func refreshToken(s *storage.Session) {
+	if s.Spotify.RefreshErr == nil {
 		token, err := authorization.Token(s.Spotify.RefreshToken)
 		if err != nil {
-			logger.Std.Errorf("error refreshing token: %v", err)
+			logger.Std.Errorf("error refreshing token failed: %v", s.ID, err)
 
 			s.Spotify.RefreshErr = err
 
@@ -52,6 +51,8 @@ func checkForTokenRefresh(s *storage.Session) {
 		s.Spotify.AccessToken = token.AccessToken
 		s.Spotify.ExpiresIn = token.ExpiresIn
 		s.Spotify.RefreshedAt = time.Now()
+
+		return
 	}
 }
 
@@ -62,6 +63,10 @@ func checkForPause(s *storage.Session) {
 	}
 
 	s.Timer = timer.Timer{}
+
+	if s.Spotify.TokenDue().IsOverdue() {
+		refreshToken(s)
+	}
 
 	if err := pause(s.Spotify.AccessToken); err == nil {
 		logger.Std.Debugf("pause player for %v", s.ID)
