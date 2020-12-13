@@ -7,22 +7,23 @@
     <link rel="stylesheet" href="{BASE_PATH}/assets/css/layout.css">
     <link rel="stylesheet" href="{BASE_PATH}/assets/css/typo.css">
     <link rel="stylesheet" href="{BASE_PATH}/assets/css/styles.css">
+    <link rel="stylesheet" href="{BASE_PATH}/assets/css/admin/styles.css">
 </head>
 <body>
 <h1>{{.Title}}</h1>
 {{range .Sessions}}
     <div>
         <ul>
-            <li>ID: {{.ID}}</li>
-            <li>Name: {{.Name}}</li>
-            <li>Timer: {{.Timer.Hours}}h {{.Timer.Minutes}}m</li>
-            <li>Timer set at: {{.Timer.SetAt}}</li>
-            <li>Due: {{.Due}}</li>
-            <li>Timer Active: {{.Timer.IsSet}}</li>
-            <li>Spotify.Token: {{.Spotify.AccessToken}}</li>
-            <li>Spotify.RefreshToken: {{.Spotify.RefreshToken}}</li>
-            <li>Spotify.ExpiresIn: {{.Spotify.ExpiresIn}}</li>
-            <li>Spotify.RefreshedAt: {{.Spotify.RefreshedAt}}</li>
+            <li><span class="key">ID:</span> <span class="value">{{.ID}}</span></li>
+            <li><span class="key">Name:</span><span class="value"> {{.Name}}</span></li>
+            <li><span class="key">Timer:</span><span class="value"> {{.Timer.Hours}}h {{.Timer.Minutes}}m</span></li>
+            <li><span class="key">Timer set at:</span><span class="value">{{.Timer.SetAt}}</span></li>
+            <li><span class="key">Due:</span><span class="value"> {{.Due}}</span></li>
+            <li><span class="key">Timer Active:</span> <span class="value">{{.Timer.IsSet}}</span></li>
+            <li><span class="key">Spotify.Token: </span><span class="value">{{.Spotify.AccessToken}}</span></li>
+            <li><span class="key">Spotify.RefreshToken:</span><span class="value"> {{.Spotify.RefreshToken}}</span></li>
+            <li><span class="key">Spotify.ExpiresIn:</span> <span class="value">{{.Spotify.ExpiresIn}}</span></li>
+            <li><span class="key">Spotify.RefreshedAt: </span><span class="value">{{.Spotify.RefreshedAt}}</span></li>
         </ul>
     </div>
 {{end}}
