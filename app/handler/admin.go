@@ -62,6 +62,7 @@ func getSessions(all []storage.Session) []adminPageSession {
 					RefreshToken: s.Spotify.RefreshToken[:10] + "...",
 					ExpiresIn:    s.Spotify.ExpiresIn,
 					RefreshedAt:  s.Spotify.RefreshedAt,
+					RefreshErr:   s.Spotify.RefreshErr,
 				},
 			},
 		)
