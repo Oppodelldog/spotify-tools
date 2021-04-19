@@ -23,3 +23,9 @@ jobs:
       
     - name: Build
       run: go build -race -ldflags "-extldflags '-static'" -o spotify-sleeptimer cmd/main.go      
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: spotify-sleeptimer
+        path: spotify-sleeptimer
