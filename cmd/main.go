@@ -9,7 +9,6 @@ import (
 
 	"github.com/Oppodelldog/spotify-sleep-timer/app/handler"
 	"github.com/Oppodelldog/spotify-sleep-timer/app/sleep"
-	"github.com/Oppodelldog/spotify-sleep-timer/assets"
 	"github.com/Oppodelldog/spotify-sleep-timer/config"
 	"github.com/Oppodelldog/spotify-sleep-timer/logger"
 )
@@ -18,7 +17,6 @@ func main() {
 	ctx := NewSignalContext(os.Interrupt)
 
 	config.Init()
-	assets.Init()
 	sleep.StartTimerWorker(ctx)
 
 	s := &http.Server{

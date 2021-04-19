@@ -38,15 +38,15 @@ func Router() http.Handler {
 		Methods(http.MethodGet)
 
 	r.PathPrefix(getPath("/assets/css")).
-		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.CSS.FS()))).
+		Handler(http.StripPrefix(path.Join(config.BasePath, "assets"), http.FileServer(http.FS(assets.CSS)))).
 		Methods(http.MethodGet)
 
 	r.PathPrefix(getPath("/assets/img")).
-		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.Images.FS()))).
+		Handler(http.StripPrefix(path.Join(config.BasePath, "assets"), http.FileServer(http.FS(assets.Images)))).
 		Methods(http.MethodGet)
 
 	r.PathPrefix(getPath("/assets/fonts")).
-		Handler(http.StripPrefix(config.BasePath, http.FileServer(assets.Fonts.FS()))).
+		Handler(http.StripPrefix(path.Join(config.BasePath, "assets"), http.FileServer(http.FS(assets.Fonts)))).
 		Methods(http.MethodGet)
 
 	r.Use(httpAuthMiddleware)

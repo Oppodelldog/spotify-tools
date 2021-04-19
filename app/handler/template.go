@@ -17,7 +17,7 @@ import (
 type templateHandler func(t *template.Template, writer http.ResponseWriter, request *http.Request)
 
 func withTemplate(filename string, h templateHandler) http.HandlerFunc {
-	const assetPath = "/assets/files/"
+	const assetPath = "files/"
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		t, err := loadTemplate(path.Join(assetPath, filename))
@@ -46,8 +46,9 @@ func writeError(writer http.ResponseWriter, err error, statusCode int) {
 		logger.Std.Errorf("error writing error (%s) to client: %v\n", err.Error(), writeErr)
 	}
 }
+
 func loadTemplate(filename string) (*template.Template, error) {
-	f, err := assets.Files.FS().Open(filename)
+	f, err := assets.Files.Open(filename)
 	if err != nil {
 		return nil, fmt.Errorf("cannot open template file '%s': %w", filename, err)
 	}
